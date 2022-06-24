@@ -1,0 +1,91 @@
+:root {
+  --light-color: #fffff4;
+  --dark-color: #202020;
+  --highlight-color: orange;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 1px solid black;
+}
+
+body {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  font-family: "Public Sans", Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 1vmax;
+}
+
+.modal {
+  display: none;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+h1 {
+  margin: 3%;
+}
+
+button {
+  background-color: var(--highlight-color);
+  padding: 0.25em 0.5em;
+  max-width: fit-content;
+  border: var(--dark-color) 0.5px solid;
+  border-radius: 0.5em;
+  margin: 1em;
+}
+
+button:hover {
+  background-color: coral;
+}
+
+button:active {
+  background-color: chocolate;
+}
+
+#view-highscores {
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60vw;
+}
+
+#start-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#start-btn {
+  font-size: 16px;
+}
+
+#quiz-content {
+  display: none;
+}
+
+#end-content {
+  display: none;
+}
+
+#result-content {
+  display: none;
+}
