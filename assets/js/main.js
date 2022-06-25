@@ -16,9 +16,12 @@ var solutionTextEl = document.getElementById("solution-text");
 // Variables
 
 
-
 // Functions
-
+function initGame(){
+  console.log(window);
+}
 
 
 // Function calls
+
+initGame();
