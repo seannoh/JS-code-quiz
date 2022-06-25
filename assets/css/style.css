@@ -7,7 +7,7 @@
 * {
   margin: 0;
   padding: 0;
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
 }
 
 body {
@@ -104,6 +104,25 @@ li button {
 
 #end-content {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+form {
+  display: flex;
+}
+
+form input[type="submit"] {
+  display: flex;
+  justify-content: center;
+}
+
+.card h2 {
+  font-weight: 400;
+  margin: 0 0 3% 0;
 }
 
 #result-content {

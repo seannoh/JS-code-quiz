@@ -82,7 +82,7 @@ var questions = [
         "find(\"find-me\")",
         "valueOf(\"find-me\")"
       ],
-      correctAnswer: "valueOf(\"find-me\")"
+      correctAnswer: "indexOf(\"find-me\")"
     },
     {
       text: "The statement (typeof []) will return ____.",
@@ -133,13 +133,13 @@ function initGame(){
 
 function startTimer() {
   var timerInterval = setInterval(function() {
-    // display time left in window and decrement
-    timerEl.textContent = timeLeft--;
     // If the time left is zero, end the quiz
     if(timeLeft < 0 || gameOver) {
       clearInterval(timerInterval);
       endQuiz();
     }
+    // display time left in window and decrement
+    timerEl.textContent = timeLeft--;
   }, 1000);
 }
 
@@ -176,9 +176,40 @@ function displayQuestion(index) {
 
 }
 
+function displayResult(isCorrect) {
+  // stub
+  console.log(isCorrect);
+}
+
+function checkAnswer(event) {
+  // grab the element that was clicked
+  var element = event.target;
+  console.log(element);
+  // check if element is a button
+  if(element.matches("button")) {
+    // check if the answer is correct and display corresponding result
+    if(element.textContent === questions[questionIndex].correctAnswer){
+      displayResult(true);
+    } else {
+      displayResult(false);
+      timeLeft -= 10;
+      timerEl.textContent = timeLeft;
+    }
+
+    // check if it is the last question, in which case, end the game. Otherwise display the next question
+    if(questionIndex === questions.length - 1){
+      gameOver = true;
+      endQuiz();
+    }else { 
+      displayQuestion(++questionIndex);
+    }
+  }
+}
+
 function endQuiz() {
   quizContentEl.style.display = "none";
   endContentEl.style.display = "flex";
+  finalScoreEl.textContent = timeLeft;
 }
 
 function shuffleArray(array) {
@@ -193,3 +224,4 @@ function shuffleArray(array) {
 // Function calls
 
 startBtn.addEventListener("click", initGame);
+quizContentEl.addEventListener("click", checkAnswer);
