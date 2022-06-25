@@ -116,13 +116,31 @@ var questions = [
     }
 ];
 
+var timeLeft = 100;
+
 
 // Functions
 function initGame(){
-  console.log(window);
+  startContentEl.style.display = "none";
+  startTimer();
+
+}
+
+function startTimer() {
+  var timerInterval = setInterval(function() {
+    timerEl.textContent = timeLeft--;
+    if(timeLeft < 0) {
+      clearInterval(timerInterval);
+      endQuiz();
+    }
+  }, 1000);
+}
+
+function endQuiz() {
+  endContentEl.style.display = "flex";
 }
 
 
 // Function calls
 
-initGame();
+startBtn.addEventListener("click", initGame);
