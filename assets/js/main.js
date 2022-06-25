@@ -220,10 +220,38 @@ function checkAnswer(event) {
   }
 }
 
+function submitScore(event) {
+  if(!initialsForm.checkValidity()){
+    initialsForm.reportValidity();
+  } else{
+    var highscoreData = {initials: initialsInput.value,
+                         score: finalScoreEl.textContent};
+    var storedScores = localStorage.getItem("highscores");
+    var scoresArr = [];
+
+    if(!storedScores){
+      scoresArr.push(highscoreData);
+    } else {
+      scoresArr = JSON.parse(storedScores);
+      scoresArr.push(highscoreData);
+    }
+    localStorage.setItem("highscores", JSON.stringify(scoresArr));
+  }
+}
+
 function endQuiz() {
   quizContentEl.style.display = "none";
   endContentEl.style.display = "flex";
   finalScoreEl.textContent = timeLeft;
+}
+
+function displayScores() {
+  //stub
+  console.log(JSON.parse(localStorage.getItem("highscores")));
+}
+
+function handleModalClicks(event) {
+  console.log(event.target);
 }
 
 function shuffleArray(array) {
@@ -239,3 +267,6 @@ function shuffleArray(array) {
 
 startBtn.addEventListener("click", initGame);
 quizContentEl.addEventListener("click", checkAnswer);
+initialsSubmitBtn.addEventListener("click", submitScore);
+viewHighscoresBtn.addEventListener("click", displayScores);
+highscoreModal.addEventListener("click", handleModalClicks);
