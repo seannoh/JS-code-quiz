@@ -122,6 +122,7 @@ var gameOver = false;
 
 
 // Functions
+
 function initGame(){
   // remove start content, start the timer, shuffle the questions, and display the first question
   startContentEl.style.display = "none";
@@ -133,13 +134,15 @@ function initGame(){
 
 function startTimer() {
   var timerInterval = setInterval(function() {
+    // display time left in window and decrement
+    timeLeft--;
+    timerEl.textContent = timeLeft;
     // If the time left is zero, end the quiz
-    if(timeLeft < 0 || gameOver) {
+    if(timeLeft <= 0 || gameOver) {
       clearInterval(timerInterval);
       endQuiz();
     }
-    // display time left in window and decrement
-    timerEl.textContent = timeLeft--;
+    
   }, 1000);
 }
 
@@ -176,9 +179,20 @@ function displayQuestion(index) {
 
 }
 
-function displayResult(isCorrect) {
+function displaySolution(isCorrect) {
   // stub
   console.log(isCorrect);
+  solutionContentEl.style.display = "block";
+  if(isCorrect){
+    solutionTextEl.textContent = "Correct! ";
+  } else {
+    solutionTextEl.textContent = "Wrong! ";
+  }
+  solutionTextEl.textContent += "The solution was: ";
+  var answer = document.createElement("span");
+  answer.textContent = questions[questionIndex].correctAnswer;
+  answer.setAttribute("style","font-family: monospace; border: 1px solid var(--dark-color); border-radius: 0.5em; padding: 0.25em 0.5em; margin: 0.5em; background-color: var(--highlight-color);")
+  solutionTextEl.appendChild(answer);
 }
 
 function checkAnswer(event) {
@@ -189,9 +203,9 @@ function checkAnswer(event) {
   if(element.matches("button")) {
     // check if the answer is correct and display corresponding result
     if(element.textContent === questions[questionIndex].correctAnswer){
-      displayResult(true);
+      displaySolution(true);
     } else {
-      displayResult(false);
+      displaySolution(false);
       timeLeft -= 10;
       timerEl.textContent = timeLeft;
     }
