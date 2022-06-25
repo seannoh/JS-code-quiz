@@ -11,7 +11,7 @@
 <body>
   <nav>
     <button id="view-highscores">View Highscores</button>
-    <div class="modal" id="highscore-modal">
+    <div class="modal">
       <h1>Highscores</h1>
     </div>
     <p>Timer: <span id="timer">0</span></p>
@@ -32,15 +32,15 @@
       <div id="end-content">
         <h1>All Done!</h1>
         <h2>Your final score is <span id="final-score"></span></h2>
-        <form id="initials-form">
-          <label for="initials-input">Enter initials</label>
-          <input type="text" name="initials-input" id="initials-input">
+        <form>
+          <label for="initials">Enter initials</label>
+          <input type="text" name="initials" id="initials">
           <input type="submit" value="Submit">
         </form>
       </div>
-      <div id="solution-content">
+      <div id="result-content">
         <hr>
-        <p id="solution-text"></p>
+        <p id="result-text"></p>
       </div>
     </section>
   </main>
