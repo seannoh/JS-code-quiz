@@ -27,7 +27,7 @@ var questions = [
       correctAnswer: "quotations"
     },
     {
-      text: "____ correctly prints \"Hello, World!\" to the console in JavaScript?",
+      text: "____ correctly prints \"Hello, World!\" to the console in JavaScript.",
       options: [
         "System.out.println(\"Hello, World!\");",
         "print(\"Hello, World!\")",
@@ -37,7 +37,7 @@ var questions = [
       correctAnswer: "console.log(\"Hello, World!\");"
     },
     {
-      text: "____ correctly adds a comment in JavaScript?",
+      text: "____ correctly adds a comment in JavaScript.",
       options: [
         "/* comment */",
         "<!-- comment -->",
@@ -95,7 +95,7 @@ var questions = [
       correctAnswer: "object"
     },
     {
-      text: "In JavaScript, ____ is correct syntax for a for loop header.",
+      text: "In JavaScript, ____ is correct syntax for a for-loop header.",
       options: [
         "for (var i = 0; i < LENGTH; i++)",
         "for (i = 0, i < LENGTH, i++)",
@@ -118,10 +118,12 @@ var questions = [
 
 var timeLeft = 100;
 var questionIndex = 0;
+var gameOver = false;
 
 
 // Functions
 function initGame(){
+  // remove start content, start the timer, shuffle the questions, and display the first question
   startContentEl.style.display = "none";
   startTimer();
   shuffleArray(questions);
@@ -131,12 +133,47 @@ function initGame(){
 
 function startTimer() {
   var timerInterval = setInterval(function() {
+    // display time left in window and decrement
     timerEl.textContent = timeLeft--;
-    if(timeLeft < 0) {
+    // If the time left is zero, end the quiz
+    if(timeLeft < 0 || gameOver) {
       clearInterval(timerInterval);
       endQuiz();
     }
   }, 1000);
+}
+
+function displayQuestion(index) {
+  // clear content in quiz-content
+  while(quizContentEl.firstChild){
+    quizContentEl.removeChild(quizContentEl.firstChild);
+  }
+
+  // make visible
+  quizContentEl.style.display = "flex";
+  
+  // create question text
+  var questionText = document.createElement("h1");
+  questionText.textContent = questions[index].text;
+  quizContentEl.appendChild(questionText);
+
+  // create option list
+  var optionsList = document.createElement("ol");
+  optionsList.style.listStyleType = "none";
+  quizContentEl.appendChild(optionsList);
+
+  // shuffle options order
+  shuffleArray(questions[index].options);
+  // for each option, create a li and button
+  for(var i = 0; i < questions[index].options.length; i++){
+    var newLi = document.createElement("li");
+    optionsList.appendChild(newLi);
+
+    var newBtn = document.createElement("button"); 
+    newBtn.textContent = questions[index].options[i];
+    newLi.appendChild(newBtn);
+  }
+
 }
 
 function endQuiz() {
@@ -145,7 +182,9 @@ function endQuiz() {
 }
 
 function shuffleArray(array) {
+  // create an array of random numbers 0 to 1 with length of "array"
   var randomMap = array.map(Math.random);
+  // sort "array" based on the random map
   array.sort(function(a,b){
     return randomMap[array.indexOf(a)]-randomMap[array.indexOf(b)];
   });
