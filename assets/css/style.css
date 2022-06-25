@@ -79,7 +79,7 @@ button:active {
 }
 
 #quiz-content {
-  display: none;
+  display: flex;
 }
 
 #end-content {

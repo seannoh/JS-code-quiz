@@ -117,13 +117,16 @@ var questions = [
 ];
 
 var timeLeft = 100;
+var questionIndex = 0;
 
 
 // Functions
 function initGame(){
   startContentEl.style.display = "none";
   startTimer();
-
+  shuffleArray(questions);
+  console.log(questions);
+  displayQuestion(questionIndex);
 }
 
 function startTimer() {
@@ -137,9 +140,16 @@ function startTimer() {
 }
 
 function endQuiz() {
+  quizContentEl.style.display = "none";
   endContentEl.style.display = "flex";
 }
 
+function shuffleArray(array) {
+  var randomMap = array.map(Math.random);
+  array.sort(function(a,b){
+    return randomMap[array.indexOf(a)]-randomMap[array.indexOf(b)];
+  });
+}
 
 // Function calls
 
