@@ -7,7 +7,7 @@
 * {
   margin: 0;
   padding: 0;
-  outline: 1px solid black;
+  /* outline: 1px solid black; */
 }
 
 body {
@@ -57,6 +57,8 @@ button:active {
 
 #view-highscores {
   margin: 0;
+  z-index: 2;
+
 }
 
 .card {
@@ -64,6 +66,8 @@ button:active {
   flex-direction: column;
   justify-content: center;
   width: 60vw;
+  background-color: #edede3;
+  padding: 3vmax;
 }
 
 #start-content {
