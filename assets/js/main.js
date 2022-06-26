@@ -250,17 +250,15 @@ function endQuiz() {
 function displayScores() {
   highscoreModal.style.display = "block";
   var scoresArr = JSON.parse(localStorage.getItem("highscores"));
+  var scoreList = highscoreModal.querySelector("ul");
+  while(scoreList.firstChild){
+    scoreList.removeChild(scoreList.firstChild);
+  }
 
   if(scoresArr){
     scoresArr.sort(function(a,b){
       return b.score - a.score;
     });
-
-    var scoreList = highscoreModal.querySelector("ul");
-    while(scoreList.firstChild){
-      scoreList.removeChild(scoreList.firstChild);
-    }
-
     for(var i = 0; i < scoresArr.length; i++) {
       var newLi = document.createElement("li");
       newLi.textContent = scoresArr[i].initials + ":  " + scoresArr[i].score;
@@ -270,7 +268,15 @@ function displayScores() {
 }
 
 function handleModalClicks(event) {
-  console.log(event.target);
+  event.stopPropagation();
+  var target = event.target;
+  console.log(target);
+  if(target.matches("#close") || target.matches(".modal")){
+    highscoreModal.style.display = "none";
+  } else if(target.matches("button")){
+    localStorage.removeItem("highscores");
+    displayScores();
+  }
 }
 
 function shuffleArray(array) {
