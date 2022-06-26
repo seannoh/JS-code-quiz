@@ -134,15 +134,18 @@ function initGame(){
 
 function startTimer() {
   var timerInterval = setInterval(function() {
+    if(gameOver) {
+      clearInterval(timerInterval);
+      return;
+    }
     // display time left in window and decrement
     timeLeft--;
     timerEl.textContent = timeLeft;
     // If the time left is zero, end the quiz
-    if(timeLeft <= 0 || gameOver) {
+    if(timeLeft <= 0) {
       clearInterval(timerInterval);
       endQuiz();
     }
-    
   }, 1000);
 }
 
@@ -161,8 +164,7 @@ function displayQuestion(index) {
   quizContentEl.appendChild(questionText);
 
   // create option list
-  var optionsList = document.createElement("ol");
-  optionsList.style.listStyleType = "none";
+  var optionsList = document.createElement("ul");
   quizContentEl.appendChild(optionsList);
 
   // shuffle options order

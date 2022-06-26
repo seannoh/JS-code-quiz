@@ -1,15 +1,19 @@
+/* Defining variables for colors */
 :root {
   --light-color: #fffff4;
   --dark-color: #202020;
   --highlight-color: orange;
 }
 
+/* Applying universal styling */
 * {
   margin: 0;
   padding: 0;
   /* outline: 1px solid black; */
+  box-sizing: border-box;
 }
 
+/* Styling for general elements */
 body {
   background-color: var(--light-color);
   color: var(--dark-color);
@@ -21,10 +25,6 @@ nav {
   display: flex;
   justify-content: space-between;
   margin: 1vmax;
-}
-
-.modal {
-  display: none;
 }
 
 main {
@@ -45,6 +45,8 @@ button {
   border: var(--dark-color) 0.5px solid;
   border-radius: 0.5em;
   margin: 0.5em;
+  cursor: pointer;
+
 }
 
 button:hover {
@@ -53,10 +55,6 @@ button:hover {
 
 button:active {
   background-color: chocolate;
-}
-
-#view-highscores {
-  margin: 0;
 }
 
 .card {
@@ -72,6 +70,57 @@ button:active {
   margin: 1%
 }
 
+/* Styling for highscores modal */
+#view-highscores {
+  margin: 0;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 3;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal .card {
+  position: relative;
+  margin: 10vh auto;
+  overflow: auto;
+}
+
+i {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-size: 24px;
+  color: var(--dark-color);
+}
+
+i:hover {
+  color: var(--highlight-color);
+  cursor: pointer;
+}
+
+.modal li {
+  padding: 0.25em;
+  outline: 1px solid #666666;
+  margin-top: 1px;
+}
+
+.modal li:nth-child(odd) {
+  background-color: rgba(265,165,0,0.6);
+}
+
+.modal button {
+  margin: auto;
+}
+
+/* Styling for the start content */
 #start-content {
   display: flex;
   flex-direction: column;
@@ -84,13 +133,15 @@ button:active {
   font-size: 16px;
 }
 
+/* Styling for questions */
 #quiz-content {
   display: flex;
   flex-direction: column;
 }
 
-ol {
+ul {
   margin: 2% 4%;
+  list-style-type: none;
 }
 
 li {
@@ -102,6 +153,7 @@ li button {
   font-size: 15px;
 }
 
+/* Styling for the end screen of the quiz */
 #end-content {
   display: none;
   flex-direction: column;
@@ -141,6 +193,7 @@ form input[type="submit"]:hover {
   margin: 0 0 3% 0;
 }
 
+/* Styling for the solution notification below each question */
 #solution-content {
   display: none;
 }

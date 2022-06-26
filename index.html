@@ -6,16 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/17c65a2959.js" crossorigin="anonymous"></script>
   <title>Coding Quiz for JavaScript</title>
 </head>
 <body>
   <nav>
     <button id="view-highscores">View Highscores</button>
-    <div class="modal">
-      <h1>Highscores</h1>
-    </div>
     <p>Timer: <span id="timer">100</span></p>
   </nav>
+  <div class="modal" id="highscore-modal">
+    <section class="card">
+      <i class="fa-solid fa-xmark" id="close"></i>
+      <h1>Highscores</h1>
+      <ul>
+        <li>lorem ipsum</li>
+        <li>this is example text</li>
+        <li>i like cats</li>
+      </ul>
+      <button id="clear-scores">Clear Highscores</button>
+    </section>
+  </div>
   <main>
     <section class="card">
       <div id="start-content">
