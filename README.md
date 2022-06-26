@@ -18,7 +18,7 @@ Follow the prompts and buttons to navigate the quiz application.
 
 ### Preview
 
-![Preview-GIF](assets/images/quiz-game-preview.gif "Preview GIF")
+![Preview-GIF](assets/images/quiz-game-preview-small.gif "Preview GIF")
 
 ## Technologies Used
 
