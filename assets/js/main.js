@@ -1,4 +1,4 @@
-// Selectors for DOM elements
+// Selectors for DOM elements---------------------
 var viewHighscoresBtn = document.getElementById("view-highscores");
 var highscoreModal = document.getElementById("highscore-modal");
 var timerEl = document.getElementById("timer");
@@ -13,8 +13,9 @@ var initialsSubmitBtn = document.getElementById("submit");
 var solutionContentEl = document.getElementById("solution-content");
 var solutionTextEl = document.getElementById("solution-text");
 
-// Variables
+// Variables -------------------------------------
 
+// array of all questions
 var questions = [
     {
       text: "String literals are enclosed in ____.",
@@ -116,24 +117,24 @@ var questions = [
     }
 ];
 
-var timeLeft = 100;
-var questionIndex = 0;
-var gameOver = false;
+var timeLeft = 100;     // timer for quiz
+var questionIndex = 0;  // counter to keep track of current question
+var gameOver = false;   // boolean to keep track when game is over
 
 
-// Functions
+// Functions -------------------------------------
 
 function initGame(){
   // remove start content, start the timer, shuffle the questions, and display the first question
   startContentEl.style.display = "none";
   startTimer();
   shuffleArray(questions);
-  console.log(questions);
   displayQuestion(questionIndex);
 }
 
 function startTimer() {
   var timerInterval = setInterval(function() {
+    // if all questions are answered, stop the timer
     if(gameOver) {
       clearInterval(timerInterval);
       return;
@@ -141,7 +142,7 @@ function startTimer() {
     // display time left in window and decrement
     timeLeft--;
     timerEl.textContent = timeLeft;
-    // If the time left is zero, end the quiz
+    // If the time left is zero, stop the timer and end the quiz
     if(timeLeft <= 0) {
       clearInterval(timerInterval);
       endQuiz();
@@ -182,25 +183,24 @@ function displayQuestion(index) {
 }
 
 function displaySolution(isCorrect) {
-  // stub
-  console.log(isCorrect);
   solutionContentEl.style.display = "block";
+  // display whether the user answered correctly or not
   if(isCorrect){
     solutionTextEl.textContent = "Correct! ";
   } else {
     solutionTextEl.textContent = "Wrong! ";
   }
+  // display the correct answer
   solutionTextEl.textContent += "The solution was: ";
   var answer = document.createElement("span");
   answer.textContent = questions[questionIndex].correctAnswer;
-  answer.setAttribute("style","font-family: monospace; border: 1px solid var(--dark-color); border-radius: 0.5em; padding: 0.25em 0.5em; margin: 0.5em; background-color: var(--highlight-color);")
+  answer.setAttribute("style","font-family: monospace; border: 1px solid var(--dark-color); border-radius: 0.5em; padding: 0.25em 0.5em; margin: 0.5em; background-color: var(--highlight-color); display: block;");
   solutionTextEl.appendChild(answer);
 }
 
 function checkAnswer(event) {
   // grab the element that was clicked
   var element = event.target;
-  console.log(element);
   // check if element is a button
   if(element.matches("button")) {
     // check if the answer is correct and display corresponding result
@@ -222,15 +222,19 @@ function checkAnswer(event) {
   }
 }
 
-function submitScore(event) {
+function submitScore() {
+  // ensure that text box is non-empty
   if(!initialsForm.checkValidity()){
     initialsForm.reportValidity();
   } else{
+    // variables for current game's score, stored score values, and new stored values
     var highscoreData = {initials: initialsInput.value,
                          score: finalScoreEl.textContent};
     var storedScores = localStorage.getItem("highscores");
     var scoresArr = [];
 
+    // if there isn't existing score data, create new data with current game's score
+    // if there is already score data, push new data onto existing data and update
     if(!storedScores){
       scoresArr.push(highscoreData);
     } else {
@@ -242,6 +246,7 @@ function submitScore(event) {
 }
 
 function endQuiz() {
+  // hide questions, show end content and update final score
   quizContentEl.style.display = "none";
   endContentEl.style.display = "flex";
   finalScoreEl.textContent = timeLeft;
@@ -250,15 +255,20 @@ function endQuiz() {
 function displayScores() {
   highscoreModal.style.display = "block";
   var scoresArr = JSON.parse(localStorage.getItem("highscores"));
+
+  // clear existing li elements
   var scoreList = highscoreModal.querySelector("ul");
   while(scoreList.firstChild){
     scoreList.removeChild(scoreList.firstChild);
   }
 
+  // check that there are stored scores 
   if(scoresArr){
+    // sort scores in descending order
     scoresArr.sort(function(a,b){
       return b.score - a.score;
     });
+    // create and display li elements with score values
     for(var i = 0; i < scoresArr.length; i++) {
       var newLi = document.createElement("li");
       newLi.textContent = scoresArr[i].initials + ":  " + scoresArr[i].score;
@@ -270,7 +280,8 @@ function displayScores() {
 function handleModalClicks(event) {
   event.stopPropagation();
   var target = event.target;
-  console.log(target);
+  // close modal if close button is clicked or outside of modal content is clicked
+  // if clear highscores button is clicked, clear highscores and display updated highscores
   if(target.matches("#close") || target.matches(".modal")){
     highscoreModal.style.display = "none";
   } else if(target.matches("button")){

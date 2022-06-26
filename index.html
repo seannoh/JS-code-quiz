@@ -10,10 +10,12 @@
   <title>Coding Quiz for JavaScript</title>
 </head>
 <body>
-  <nav>
+  <!-- container for content on top -->
+  <header>
     <button id="view-highscores">View Highscores</button>
     <p>Timer: <span id="timer">100</span></p>
-  </nav>
+  </header>
+  <!-- modal for highscores -->
   <div class="modal" id="highscore-modal">
     <section class="card">
       <i class="fa-solid fa-xmark" id="close"></i>
@@ -26,8 +28,10 @@
       <button id="clear-scores">Clear Highscores</button>
     </section>
   </div>
+  <!-- main content -->
   <main>
     <section class="card">
+      <!-- start content -->
       <div id="start-content">
         <h1>Coding Quiz Challenge</h1>
         <p>
@@ -36,9 +40,11 @@
         </p>
         <button id="start-btn">Start Quiz</button>
       </div>
+      <!-- quiz content -->
       <div id="quiz-content">
         
       </div>
+      <!-- end content -->
       <div id="end-content">
         <h1>All Done!</h1>
         <h2>Your final score is <span id="final-score"></span></h2>
@@ -48,6 +54,7 @@
           <input type="submit" value="Submit" id="submit">
         </form>
       </div>
+      <!-- solution content -->
       <div id="solution-content">
         <hr>
         <p id="solution-text"></p>
