@@ -76,7 +76,7 @@ button:active {
 }
 
 .modal {
-  display: block;
+  display: none;
   position: fixed;
   z-index: 3;
   margin: auto;
@@ -117,7 +117,7 @@ i:hover {
 }
 
 .modal button {
-  margin: auto;
+  margin: 3% auto;
 }
 
 /* Styling for the start content */

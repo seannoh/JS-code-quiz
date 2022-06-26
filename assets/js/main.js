@@ -248,8 +248,25 @@ function endQuiz() {
 }
 
 function displayScores() {
-  //stub
-  console.log(JSON.parse(localStorage.getItem("highscores")));
+  highscoreModal.style.display = "block";
+  var scoresArr = JSON.parse(localStorage.getItem("highscores"));
+
+  if(scoresArr){
+    scoresArr.sort(function(a,b){
+      return b.score - a.score;
+    });
+
+    var scoreList = highscoreModal.querySelector("ul");
+    while(scoreList.firstChild){
+      scoreList.removeChild(scoreList.firstChild);
+    }
+
+    for(var i = 0; i < scoresArr.length; i++) {
+      var newLi = document.createElement("li");
+      newLi.textContent = scoresArr[i].initials + ":  " + scoresArr[i].score;
+      scoreList.appendChild(newLi);
+    }
+  }
 }
 
 function handleModalClicks(event) {
